@@ -4,6 +4,7 @@ import React from "react";
 import Header from "../Header";
 import Title from "../Title";
 import Intro from "./components/Intro";
+import TopThreads from "./components/TopThreads";
 
 //render HOME function
 function Home() {
@@ -17,9 +18,11 @@ function Home() {
             
             <Header />
 
-            <Title title={"Welcome!"}/>
+            <Title title={`Welcome!`}/>
 
             <Intro />
+
+            <TopThreads />
 
         </div>
     );
