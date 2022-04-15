@@ -3,6 +3,7 @@ import React from "react";
 //react components
 import Header from "../Header";
 import Title from "../Title";
+import Intro from "./components/Intro";
 
 //render HOME function
 function Home() {
@@ -13,9 +14,12 @@ function Home() {
     //Footer: the bottom of the website
     return (
         <div>
+            
             <Header />
 
             <Title title={"Welcome!"}/>
+
+            <Intro />
 
         </div>
     );
