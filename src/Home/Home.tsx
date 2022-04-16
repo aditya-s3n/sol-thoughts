@@ -5,6 +5,7 @@ import Header from "../Header";
 import Title from "../Title";
 import Intro from "./components/Intro";
 import TopThreads from "./components/TopThreads";
+import Footer from "../Footer";
 
 //render HOME function
 function Home() {
@@ -24,6 +25,8 @@ function Home() {
 
             <TopThreads />
 
+            <Footer />
+            
         </div>
     );
 }
