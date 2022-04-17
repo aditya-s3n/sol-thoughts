@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Home from "./Home/Home.tsx";
+import Thread from "./Thread/Thread"
 
 ReactDOM.render(
-  <Home />,
+  <Thread />,
   document.getElementById('root')
 );

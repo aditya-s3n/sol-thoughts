@@ -19,7 +19,7 @@ function Home() {
             
             <Header />
 
-            <Title title={`Welcome!`}/>
+            <Title title={`Welcome!`} center={true}/>
 
             <Intro />
 

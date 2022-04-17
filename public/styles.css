@@ -5,4 +5,13 @@
     text-align: center;
 }
 
+.thread-post-title {
+    margin-left: 7rem;
+    width: 75%;
+}
+
+.thread-state:disabled {
+    background-color: orange;
+    border-color: rgb(255, 170, 0);
+}
 /*********************** ID **********************/
