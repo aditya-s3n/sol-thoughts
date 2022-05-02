@@ -1,5 +1,7 @@
 //react modules
 import React from "react"
+//react components
+import Tag from "../../Tag";
 
 //render ThreadCard function
 //props: title of the card, number of posts in the thread, if the card is complete for ongoing, route for the thread
@@ -17,7 +19,7 @@ function ThreadCard(props) {
                     </a>
                     <hr />
                     <p className="card-text"><strong>Posts:</strong> {props.numOfPosts}</p>
-                    <button type="button" class={props.complete ? "btn btn-primary thread-state" : "btn btn-success"} disabled>{props.complete ? "Complete" : "Ongoing"}</button>
+                    <Tag complete={props.complete} />
 
                 </div>
 

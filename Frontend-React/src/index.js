@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Thread from "./Thread/Thread"
+import Post from "./Post/Post"
 
 ReactDOM.render(
-  <Thread />,
+  <Post />,
   document.getElementById('root')
 );
