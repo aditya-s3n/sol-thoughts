@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Post from "./Post/Post"
+import App from "./App"
 
-ReactDOM.render(
-  <Post />,
-  document.getElementById('root')
-);
+//render the App page
+ReactDOM.render(<App />, document.getElementById("root"));
