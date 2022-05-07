@@ -4,6 +4,8 @@ import React, {useEffect, useState} from "react";
 import Post from "./Post/Post";
 import Home from "./Home/Home";
 import Thread from "./Thread/Thread";
+//JS modules
+import domainName from "./domainName.js";
 
 
 //send App render function
@@ -13,16 +15,15 @@ function App() {
     
     //state to render page type
     const [page, setPage] = useState(null);
-
+    
     //receive what page to render
     useEffect(() => {
         //fetch the page to render
-        fetch(`http://localhost:3001${pathName}`)
+        fetch(`${domainName}${pathName}`)
             .then(response => response.json()) //convert JSON to JS objection
             .then(data => {
                 setPage(data.page); //set up which page to render
             });
-            
     });
 
     //returns the Page to render

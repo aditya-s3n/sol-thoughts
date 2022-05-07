@@ -18,8 +18,8 @@ app.get("/threads", (req, res) => {
     res.json({page: "Thread"}); //send JSON information on what page to render
 });
 
-//route (/posts/:postName)
-// app.get("/posts/:postName", (req, res) => {
+//route (/posts/:postID)
+// app.get("/posts/:postID", (req, res) => {
 //     res.json({})
 // });
 

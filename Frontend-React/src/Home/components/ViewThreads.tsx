@@ -4,7 +4,9 @@ import React from "react";
 //render View Threads Button function
 function ViewThreads() {
     return (
-        <button type="button" class="btn btn-lg btn-outline-dark" onClick="/threads">View Threads</button>
+        <a href="/threads">
+            <button type="button" className="btn btn-lg btn-outline-dark my-4">View Threads</button>
+        </a>
     );
 }
 

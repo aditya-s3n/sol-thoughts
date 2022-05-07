@@ -8,7 +8,7 @@ function TopThreads() {
     return (
         <div className="center-text">
             
-            <table class="table mx-auto my-5 table-bordered" style={{"width": "25%"}}>
+            <table className="table mx-auto mt-5 table-bordered" style={{"width": "25%"}}>
 
                 <thead>
                     <tr>
@@ -20,17 +20,17 @@ function TopThreads() {
                 <tbody>
                     <tr>
                         <th scope="row">1</th>
-                            <td>Thread Page #1</td>
+                            <td><a href="/threads">Thread Page #1</a></td>
                     </tr>
 
                     <tr>
                         <th scope="row">2</th>
-                            <td>Thread Page #2</td>
+                            <td><a href="/threads">Thread Page #2</a></td>
                     </tr>
 
                     <tr>
                         <th scope="row">2</th>
-                            <td>Thread Page #3</td>
+                            <td><a href="/threads">Thread Page #3</a></td>
                     </tr>
                 </tbody>
 

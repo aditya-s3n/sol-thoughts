@@ -6,6 +6,7 @@ import Title from "../Title";
 import Intro from "./components/Intro";
 import TopThreads from "./components/TopThreads";
 import Footer from "../Footer";
+//JS modules
 
 //render HOME function
 function Home() {

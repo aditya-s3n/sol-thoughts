@@ -4,7 +4,7 @@ import React from "react";
 //render Header 
 function Header() {
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light nav-masthead">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light nav-masthead" id="navbar">
 
             <div className="container-fluid">
 
