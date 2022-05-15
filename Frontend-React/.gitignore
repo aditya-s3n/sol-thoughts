@@ -9,6 +9,9 @@
 # production
 /build
 
+#DEGBUGGING
+/TESTING
+
 # misc
 .DS_Store
 .env.local

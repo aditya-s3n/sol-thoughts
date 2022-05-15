@@ -19,7 +19,7 @@ function Thread() {
                 name: "Example 1",
                 posts: 3,
                 complete: true,
-                route: "/example-1"
+                route: "/post"
             },
             {
                 keyID: 2,

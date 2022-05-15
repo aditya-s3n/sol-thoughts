@@ -4,32 +4,34 @@ import React from "react";
 import IntroLink from "./IntroLink";
 import IntroInfo from "./IntroInfo";
 //JS module
-import introContent from "./content.js";
+import introContent from "./content.js"; //get the content to render in the home page
 
 //Intro function render
 function Intro() {
 
-
+    //map the introContent data into make all the IntroLinks and IntroInfo components
     return (
         <div style={{"width": "50%"}} className="mx-auto">
 
             <ul className="nav nav-tabs justify-content-center my-5" id="myTab" role="tablist">
 
-                <IntroLink name="Home" active={true} />
-
-                <IntroLink name="As" active={false} />
-
-                <IntroLink name="Poke" active={false} />
+                {
+                //map all the values from the object to IntroLink
+                introContent.map((objectValue) => {
+                    return <IntroLink name={objectValue.name} active={objectValue.active} id={objectValue.id} />
+                })
+                }
 
             </ul>
                 
             <div className="tab-content center-text mx-auto" id="myTabContent">
-                
-                <IntroInfo name="Home" active={true} content={introContent.home}/>
-                
-                <IntroInfo name="As" active={false} content="This is the As content" />
-                
-                <IntroInfo name="Poke" active={false} content="This is the Poke content" />
+
+                {
+                //map all the values from the object to IntroInfo
+                introContent.map((objectValue) => {
+                    return <IntroInfo name={objectValue.name} active={objectValue.active} id={objectValue.id} content={objectValue.content} />
+                })
+                }
 
             </div>
 

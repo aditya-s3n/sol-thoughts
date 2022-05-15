@@ -6,6 +6,8 @@ import Home from "./Home/Home";
 import Thread from "./Thread/Thread";
 //JS modules
 import domainName from "./domainName.js";
+//TESTING
+import Test from "./TESTING/Test";
 
 
 //send App render function
@@ -35,7 +37,10 @@ function App() {
             return <Thread />    
 
         case "Post": //post page
-            return <Post />    
+            return <Post />  
+            
+        case "Test": //testing page (FOR DEBUGGING ONLY)
+            return <Test />
         
         default: //reset
             break;
