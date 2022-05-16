@@ -21,17 +21,17 @@ function TopThreads(props) {
                 <tbody>
                     <tr>
                         <th scope="row">1</th>
-                            <td><a href={props.route[0]}>{props.name.current[0]}</a></td>
+                            <td><a href={props.route[0]}>{props.name[0]}</a></td>
                     </tr>
 
                     <tr>
                         <th scope="row">2</th>
-                            <td><a href={props.route[1]}>{props.name.current[1]}</a></td>
+                            <td><a href={props.route[1]}>{props.name[1]}</a></td>
                     </tr>
 
                     <tr>
                         <th scope="row">3</th>
-                            <td><a href={props.route[2]}>{props.name.current[2]}</a></td>
+                            <td><a href={props.route[2]}>{props.name[2]}</a></td>
                     </tr>
                 </tbody>
 

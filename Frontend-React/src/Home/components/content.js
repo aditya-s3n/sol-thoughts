@@ -1,6 +1,7 @@
 const introContent = [
     {
-        content: `<h3>Introduction</h3>
+        content: `
+        <h3>Introduction</h3>
         <hr />
 
         <p>Aditya is my name.</p>
@@ -9,8 +10,20 @@ const introContent = [
 
         <br />
         <p>Though you can trust me :)</p>
-        {showImage && <img src="https://thumbor.forbes.com/thumbor/200x200/smart/filters:format(jpeg)/https%3A%2F%2Fspecials-images.forbesimg.com%2Fimageserve%2F5c76b7d331358e35dd2773a9%2F416x416.jpg%3Fbackground%3D000000%26cropX1%3D0%26cropX2%3D4401%26cropY1%3D0%26cropY2%3D4401" alt="pfp"/>}
-        {!(showImage) && <button className="btn btn-outline-dark" onClick={() => { setShowImage(true) }}>Show Image</button>}
+        {
+        showImage && /*#__PURE__*/React.createElement("img", {
+            src: "https://thumbor.forbes.com/thumbor/200x200/smart/filters:format(jpeg)/https%3A%2F%2Fspecials-images.forbesimg.com%2Fimageserve%2F5c76b7d331358e35dd2773a9%2F416x416.jpg%3Fbackground%3D000000%26cropX1%3D0%26cropX2%3D4401%26cropY1%3D0%26cropY2%3D4401",
+            alt: "pfp"
+        })
+        }
+        {
+        !showImage && /*#__PURE__*/React.createElement("button", {
+            className: "btn btn-outline-dark",
+            onClick: () => {
+            setShowImage(true);
+            }
+        }, "Show Image")
+        }
         <p>^ that's me</p>
 
         <br />

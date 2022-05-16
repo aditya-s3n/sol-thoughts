@@ -1,5 +1,5 @@
 //import react modules
-import React, {useEffect, useRef} from "react";
+import React, {useEffect, useState} from "react";
 //react components
 import Header from "../Header";
 import Title from "../Title";
@@ -9,25 +9,27 @@ import Footer from "../Footer";
 //JS modules
 import domainName from "../domainName.js"
 
-async function getTopThreads() {
-    let response = await fetch(`${domainName}/topThreads`);
-    let JSONresponse = await response.json();
-    return JSONresponse;
-}
 
 //render HOME function
 function Home() {
     //top 3 threads variable
-    const threadName = useRef([]);
-    const threadRoute = useRef([]);
-    //get the top 3 threads
+    const [threadName, setThreadName] = useState([]);
+    const [threadRoute, setThreadRoute] = useState([]);
+    
+    //get the top 3 threads TODO
+    async function setTopThreads() {
+        let response = await fetch(`${domainName}/topThreads`); //get the data from the server URL
+        let data = await response.json(); //make data readable
+
+        //set the state of both the thread name and route
+        setThreadName(data.name);
+        setThreadRoute(data.route);
+    }
+
+    //get the top threads data, and run only once
     useEffect(() => {
-        let topThreads = getTopThreads();
-        topThreads.then(result => {
-            threadName.current = result.name;
-            threadRoute.current = result.route;
-        });
-    });
+        setTopThreads();
+    }, []); //run only once
 
     //Header: the navbar and title of the website
     //Title: title component
@@ -43,7 +45,7 @@ function Home() {
 
             <Intro />
 
-            <TopThreads name={threadName} route={threadRoute.current}/>
+            <TopThreads name={threadName} route={threadRoute}/>
 
             <Footer />
             
