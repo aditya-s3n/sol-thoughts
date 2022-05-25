@@ -1,5 +1,6 @@
 //react modules
 import React from "react";
+import * as ReactDOMServer from 'react-dom/server';
 //react components
 import IntroLink from "./IntroLink";
 import IntroInfo from "./IntroInfo";
@@ -8,7 +9,6 @@ import introContent from "./content.js"; //get the content to render in the home
 
 //Intro function render
 function Intro() {
-
     //map the introContent data into make all the IntroLinks and IntroInfo components
     return (
         <div style={{"width": "50%"}} className="mx-auto">
@@ -29,7 +29,7 @@ function Intro() {
                 {
                 //map all the values from the object to IntroInfo
                 introContent.map((objectValue) => {
-                    return <IntroInfo name={objectValue.name} active={objectValue.active} id={objectValue.id} content={objectValue.content} />
+                    return <IntroInfo name={objectValue.name} active={objectValue.active} id={objectValue.id} content={objectValue.content} scriptID={objectValue.scriptIDs} />
                 })
                 }
 

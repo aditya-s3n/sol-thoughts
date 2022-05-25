@@ -1,0 +1,15 @@
+{
+    _id: ObjectID,
+    name: threadName,
+    route: threadRoute,
+    postNum: 3,
+    complete: true,
+
+    posts: [
+        {
+            title: postName
+            content: htmlCode
+        }
+    ]
+
+}

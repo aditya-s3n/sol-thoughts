@@ -43,7 +43,8 @@ function App() {
             return <Test />
         
         default: //reset
-            break;
+            return <Post />  
+            
     }
 }
 

@@ -8,7 +8,7 @@ const app = express();
 app.use(cors()); //set up CORS middleware
 const port = 3001;
 //mongoose configs
-mongoose.connect("mongodb://localhost:27017/sun");
+mongoose.connect("mongodb://localhost:27017/sunDB");
 
 /********************** MongoDB (Database) **********************/
 //create model + collection
@@ -31,8 +31,6 @@ app.get("/topThreads", (req, res) => {
         route: ["/thread1", "/thread2", "/thread3"]
     }); //send JSON of the 3 top threads on the website
 });
-// route (/threadData)
-// app.get("/threadData", (req))
 
 //route (/post)
 app.get("/posts", (req, res) => {
