@@ -1,6 +1,5 @@
 //react modules
 import React from "react";
-import * as ReactDOMServer from 'react-dom/server';
 //react components
 import IntroLink from "./IntroLink";
 import IntroInfo from "./IntroInfo";

@@ -13,52 +13,54 @@ import Footer from "../Footer";
 function Thread() {
     //all the threads in nested JS objects in arrays
     let threads = [
-        [
             {
                 keyID: 1,
                 name: "Example 1",
                 posts: 3,
                 complete: true,
-                route: "/post"
+                route: "/post",
+                views: 3
             },
             {
                 keyID: 2,
                 name: "Example 2",
                 posts: 3,
                 complete: false,
-                route: "/example-2"
+                route: "/example-2",
+                views: 3
             },
             {
                 keyID: 3,
                 name: "Example 3",
                 posts: 4,
                 complete: true,
-                route: "/example-3"
-            }
-        ],
-        [
+                route: "/example-3",
+                views: 3
+            },
             {
                 keyID: 4,
                 name: "Example 4",
                 posts: 3,
                 complete: true,
-                route: "/example-4"
+                route: "/example-4",
+                views: 3
             },
             {
                 keyID: 5,
                 name: "Example 5",
                 posts: 3,
                 complete: false,
-                route: "/example-5"
+                route: "/example-5",
+                views: 3
             },
             {
                 keyID: 6,
                 name: "Example 6",
                 posts: 4,
                 complete: true,
-                route: "/example-6"
+                route: "/example-6",
+                views: 3
             }
-        ],
     ];
 
     //Header: the navbar and title of the website
@@ -72,9 +74,7 @@ function Thread() {
             
             <Title title="Threads" center={false}/>
 
-            {threads.map((value) => {
-                return <ThreadRow array={value}/>
-            })} 
+            <ThreadRow array={threads} />
 
             <Footer />
 

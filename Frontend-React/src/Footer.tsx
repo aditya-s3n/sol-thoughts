@@ -13,10 +13,9 @@ function Footer() {
                     Back to the Top
                 </a>
 
-
                 <ul className="nav col-md-4 justify-content-end">
-                    <li className="nav-item"><a href="https://twitter.com/AdityaS3n" className="nav-link px-2 text-muted"><i className="fa-brands fa-twitter fa-xl"></i></a></li>
-                    <li className="nav-item"><a href="https://github.com/aditya-s3n" className="nav-link px-2 text-muted"><i className="fa-brands fa-github fa-xl"></i></a></li>
+                    <li className="nav-item"><a href="https://twitter.com/AdityaS3n" className="nav-link px-2 text-muted"><i class="bi bi-twitter fs-3"></i></a></li>
+                    <li className="nav-item"><a href="https://github.com/aditya-s3n" className="nav-link px-2 text-muted"><i class="bi bi-github fs-3"></i></a></li>
                 </ul>
 
             </footer>

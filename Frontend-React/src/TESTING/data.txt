@@ -4,11 +4,18 @@
     route: threadRoute,
     postNum: 3,
     complete: true,
+    views: 3,
 
     posts: [
         {
-            title: postName
-            content: htmlCode
+            title: postName,
+            content: htmlCode,
+            contentTag: ["video", "image", "text", "dynamic"]
+        },
+        {
+            title: postName,
+            content: htmlCode,
+            contentTag: ["text"]
         }
     ]
 

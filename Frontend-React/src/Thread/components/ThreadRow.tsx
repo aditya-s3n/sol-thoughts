@@ -6,12 +6,23 @@ import ThreadCard from "./ThreadCard";
 //render ThreadRow function
 //props: the array with 3 posts to render
 function ThreadRow(props) {
+    console.log(props)
     return (
-        <div className="row container mx-auto my-5">
-                
-            {props.array.map((value) => {
-                return <ThreadCard title={value.name} numOfPosts={value.posts} complete={value.complete} key={value.keyID} route={value.route} />
-            })}
+        <div className="container mx-auto">
+        
+            <div className="row row-cols-3">
+                    
+                {
+                props.array.map((value) => {
+                    return (
+                        <div className="col my-4">
+                            <ThreadCard title={value.name} numOfPosts={value.posts} complete={value.complete} key={value.keyID} route={value.route} views={value.views}/>
+                        </div>
+                    );
+                })
+                }
+
+            </div>
 
         </div>
 

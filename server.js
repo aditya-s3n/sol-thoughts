@@ -37,9 +37,9 @@ app.get("/posts", (req, res) => {
     res.redirect("/threads"); //posts page is the same threads page
 });
 
-//route (/posts/:postID)
-app.get("/posts/:postID", (req, res) => {
-    let threadID = req.params.postID;
+//route (/threads/threadID
+app.get("/threads/:threadID", (req, res) => {
+    let threadID = req.params.threadID;
     res.json({});
 });
 
