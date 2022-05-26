@@ -11,25 +11,13 @@ import domainName from "../domainName.js"
 
 
 //render HOME function
-function Home() {
+//props: the 3 top threads and information
+function Home(props) {
+    console.log(props);
     //top 3 threads variable
-    const [threadName, setThreadName] = useState([]);
-    const [threadRoute, setThreadRoute] = useState([]);
-    
-    //get the top 3 threads TODO
-    async function setTopThreads() {
-        let response = await fetch(`${domainName}/topThreads`); //get the data from the server URL
-        let data = await response.json(); //make data readable
+    const [threadData, setThreadData] = useState(props.threadData);
 
-        //set the state of both the thread name and route
-        setThreadName(data.name);
-        setThreadRoute(data.route);
-    }
 
-    //get the top threads data, and run only once
-    useEffect(() => {
-        setTopThreads();
-    }, []); //run only once
 
     //Header: the navbar and title of the website
     //Title: title component
@@ -45,7 +33,7 @@ function Home() {
 
             <Intro />
 
-            <TopThreads name={threadName} route={threadRoute}/>
+            <TopThreads threadArray={threadData}/>
 
             <Footer />
             

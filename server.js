@@ -11,6 +11,7 @@ const app = express();
 app.use(cors()); //set up CORS middleware
 const port = 3001;
 //mongoose configs
+mongo_URI = process.env.MONGO_URI; //get the URI to the mongo database from .env file
 mongoose.connect("mongodb://localhost:27017/sunDB"); //TODO change to Atlas URI from .env
 
 
@@ -47,9 +48,15 @@ async function findTopThreads() {
     //find all the documents
     const threads = await Thread.find({}).exec();
     
-    //array to get top 3 threads
-    
+    //array to get top 3 thread
+    threads.sort((index1, index2) => {
+        return index1.views - index2.views //sort by the views
+    });
+    //reverse the array
+    threads.reverse();
+
     //return the top 3 threads in array
+    return [threads[0], threads[1], threads[2]];
 }
 //add 1 to views of a certain thread
 async function addViewToThread(route) {
@@ -75,7 +82,7 @@ async function insertThread(name, route, postNum, complete, posts) {
         route: route,
         postNum: postNum,
         complete: complete,
-        views: 0,
+        views: posts.length,
         posts: posts
     });
 
@@ -85,7 +92,10 @@ async function insertThread(name, route, postNum, complete, posts) {
 async function insertPostToThread(postObject, threadRoute) {
     //find the original posts array
     const originalThread = await findThread(threadRoute);
-    const originalPosts = originalThread.posts; //get the posts
+    originalThread.then(result => { //resolve promise
+        const originalPosts = originalThread.posts; //get the posts
+    });
+    
 
     //insert new post with ES6 spread operator
     const updatedPosts = [...originalPosts, postObject]; //create the updated posts array
@@ -104,25 +114,22 @@ async function insertPostToThread(postObject, threadRoute) {
 /********************** Routing **********************/
 // route (/)
 app.get("/", (req, res) => {
-    res.json({page: "Home"}); //send JSON data on what page to render
+    const threadData = findTopThreads();
+    
+    threadData.then(value => { //resolve promise
+        res.json({ page: "Home", topThreads: value}); //send JSON data on what page to render
+    });
+    
 });
 
 // route (/threads)
 app.get("/threads", (req, res) => {
     const threads = findAllThreads(); //get all the threads in an array
-    
+    console.log(threads);
     //resolve the promise
     threads.then(result => { 
         res.json({page: "Thread", threadData: result}); //send JSON information on what page to render
     });
-});
-//route (/topThreads)
-app.get("/topThreads", (req, res) => {
-
-    res.json({
-        name: ["Thread 1", "Thread 2", "Thread 3"], 
-        route: ["/thread1", "/thread2", "/thread3"]
-    }); //send JSON of the 3 top threads on the website
 });
 
 //route (/post)
@@ -133,7 +140,7 @@ app.get("/posts", (req, res) => {
 //route (/threads/threadID
 app.get("/threads/:threadID", (req, res) => {
     let threadID = req.params.threadID;
-    
+
     res.json({});
 });
 

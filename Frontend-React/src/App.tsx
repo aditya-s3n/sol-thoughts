@@ -19,6 +19,8 @@ function App() {
     const [page, setPage] = useState(null);
     //reference the thread Data to render
     const threadDataReference = useRef(null);
+    //reference the 3 top threads for home page
+    const top3Threads = useRef(null);
 
     //receive what page to render
     useEffect(() => {
@@ -30,6 +32,10 @@ function App() {
                 if (data.page === "Thread") {
                     threadDataReference.current = data.threadData;
                 }
+                //check if page is home page
+                else if (data.page === "Home") {
+                    top3Threads.current = data.topThreads;
+                }
                 setPage(data.page); //set up which page to render
             });
     }, [pathName]);
@@ -37,7 +43,7 @@ function App() {
     //returns the Page to render
     switch (page) {
         case "Home": //home page
-            return <Home />
+            return <Home threadData={top3Threads.current}/>
             
         case "Thread": //thread page
             return <Thread threadData={threadDataReference.current}/>    

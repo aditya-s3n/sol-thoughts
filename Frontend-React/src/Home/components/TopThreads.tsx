@@ -4,8 +4,9 @@ import React from "react";
 import ViewThreads from "./ViewThreads";
 
 //render TopThreads function
-//props: the name of the 3 top threads [array], the route of the 3 threads [array]
+//props: array of the threads
 function TopThreads(props) {
+
     return (
         <div className="center-text">
             
@@ -21,17 +22,17 @@ function TopThreads(props) {
                 <tbody>
                     <tr>
                         <th scope="row">1</th>
-                            <td><a href={props.route[0]}>{props.name[0]}</a></td>
+                            <td><a href={`/threads/${props.threadArray[0].route}`}>{props.threadArray[0].name}</a></td>
                     </tr>
 
                     <tr>
                         <th scope="row">2</th>
-                            <td><a href={props.route[1]}>{props.name[1]}</a></td>
+                            <td><a href={`/threads/${props.threadArray[1].route}`}>{props.threadArray[1].name}</a></td>
                     </tr>
 
                     <tr>
                         <th scope="row">3</th>
-                            <td><a href={props.route[2]}>{props.name[2]}</a></td>
+                            <td><a href={`/threads/${props.threadArray[2].route}`}>{props.threadArray[2].name}</a></td>
                     </tr>
                 </tbody>
 
