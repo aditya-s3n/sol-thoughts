@@ -13,7 +13,7 @@ function ThreadCard(props) {
 
             <div className="card-body">
 
-                <a href={props.route}>
+                <a href={`/threads/${props.route}`}>
                     <h5 className="card-title text-decoration-underline">{props.title}</h5>
                 </a>
                 <hr />

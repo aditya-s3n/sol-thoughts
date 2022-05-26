@@ -20,3 +20,28 @@
     ]
 
 }
+
+{
+    _id: ObjectID,
+    name: threadName,
+    route: threadRoute,
+    postNum: 3,
+    complete: true,
+    views: 3,
+
+    posts: [
+        {
+            title: postName,
+            content: htmlCode,
+            contentTag: ["video", "image", "text", "dynamic"],
+            threadReference: threadRoute
+        },
+        {
+            title: postName,
+            content: htmlCode,
+            contentTag: ["text"],
+            threadReference: threadRoute
+        }
+    ]
+
+}

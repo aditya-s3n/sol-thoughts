@@ -1,5 +1,5 @@
 //react modules
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useRef} from "react";
 //react components
 import Post from "./Post/Post";
 import Home from "./Home/Home";
@@ -17,16 +17,22 @@ function App() {
     
     //state to render page type
     const [page, setPage] = useState(null);
-    
+    //reference the thread Data to render
+    const threadDataReference = useRef(null);
+
     //receive what page to render
     useEffect(() => {
         //fetch the page to render
         fetch(`${domainName}${pathName}`)
             .then(response => response.json()) //convert JSON to JS objection
             .then(data => {
+                //check if page is thread page
+                if (data.page === "Thread") {
+                    threadDataReference.current = data.threadData;
+                }
                 setPage(data.page); //set up which page to render
             });
-    });
+    }, [pathName]);
 
     //returns the Page to render
     switch (page) {
@@ -34,7 +40,7 @@ function App() {
             return <Home />
             
         case "Thread": //thread page
-            return <Thread />    
+            return <Thread threadData={threadDataReference.current}/>    
 
         case "Post": //post page
             return <Post />  
