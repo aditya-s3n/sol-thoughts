@@ -42,6 +42,31 @@ async function findThread(route) {
     //return document object
     return thread;
 }
+//find the top 3 threads by views
+async function findTopThreads() {
+    //find all the documents
+    const threads = await Thread.find({}).exec();
+    
+    //array to get top 3 threads
+    
+    //return the top 3 threads in array
+}
+//add 1 to views of a certain thread
+async function addViewToThread(route) {
+    //get the thread document
+    const thread = await findThread(route);
+    //add one to views
+    thread.then(result => {
+        const updatedViews = result.views + 1;
+    });
+    //update the thread document
+    await Thread.updateOne({ route: route }, { $set: { views: updatedViews }}, (err, res) => {
+        //check for error
+        if (err) {
+            console.log(err);
+        }
+    });
+}
 
 //insert a document thread
 async function insertThread(name, route, postNum, complete, posts) {
@@ -65,7 +90,7 @@ async function insertPostToThread(postObject, threadRoute) {
     //insert new post with ES6 spread operator
     const updatedPosts = [...originalPosts, postObject]; //create the updated posts array
     const updatePostsNum = originalPosts.postNum + 1; //create updated Posts Num
-    await Thread.updateOne({route: threadRoute}, { $set: { posts: updatedPosts }, $set: {postNum: updatePostsNum} }, (err, res) => { //update the thread posts
+    await Thread.updateOne({route: threadRoute}, { $set: { posts: updatedPosts, postNum: updatePostsNum } }, (err, res) => { //update the thread posts
         if (err) { //check for error
             console.log(err);
         }
@@ -74,6 +99,8 @@ async function insertPostToThread(postObject, threadRoute) {
         }
     });
 }
+
+
 /********************** Routing **********************/
 // route (/)
 app.get("/", (req, res) => {
@@ -91,6 +118,7 @@ app.get("/threads", (req, res) => {
 });
 //route (/topThreads)
 app.get("/topThreads", (req, res) => {
+
     res.json({
         name: ["Thread 1", "Thread 2", "Thread 3"], 
         route: ["/thread1", "/thread2", "/thread3"]
@@ -105,6 +133,7 @@ app.get("/posts", (req, res) => {
 //route (/threads/threadID
 app.get("/threads/:threadID", (req, res) => {
     let threadID = req.params.threadID;
+    
     res.json({});
 });
 
