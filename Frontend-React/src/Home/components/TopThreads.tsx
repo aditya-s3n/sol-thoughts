@@ -8,7 +8,7 @@ import ViewThreads from "./ViewThreads";
 function TopThreads(props) {
 
     return (
-        <div className="center-text">
+        <div className="text-center">
             
             <table className="table mx-auto mt-5 table-bordered" style={{"width": "25%"}}>
 

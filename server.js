@@ -117,7 +117,7 @@ app.get("/", (req, res) => {
     const threadData = findTopThreads();
     
     threadData.then(value => { //resolve promise
-        res.json({ page: "Home", topThreads: value}); //send JSON data on what page to render
+        res.json({ page: "Home", topThreads: value }); //send JSON data on what page to render
     });
     
 });
@@ -125,7 +125,7 @@ app.get("/", (req, res) => {
 // route (/threads)
 app.get("/threads", (req, res) => {
     const threads = findAllThreads(); //get all the threads in an array
-    console.log(threads);
+
     //resolve the promise
     threads.then(result => { 
         res.json({page: "Thread", threadData: result}); //send JSON information on what page to render
@@ -137,19 +137,31 @@ app.get("/posts", (req, res) => {
     res.redirect("/threads"); //posts page is the same threads page
 });
 
-//route (/threads/threadID
-app.get("/threads/:threadID", (req, res) => {
-    let threadID = req.params.threadID;
+//route (/threads/:threadRoute)
+app.get("/threads/:threadRoute", (req, res) => {
+    let threadID = req.params.threadRoute; //get what thread to render
 
-    res.json({});
+    const foundThread = findThread(threadID); //get thread document
+
+    foundThread //resolve promise
+        .then(value => {
+            res.json({page: "Post", threadData: value}); //send data to render post page with all the posts
+        })  
+        .catch(err => {
+            res.json({page: "404"}); //render the 404 page when can't find any thread
+        });
 });
-
 
 /*** Testing HTML Pages ***/
 app.route("/test")
     .get((req, res) => {
         res.json({page: "Test"});
     });
+
+//route 404
+app.get("*", (req, res) => { //any route, KEEP LAST
+    res.status(404).json({page: "404"}); //send 404 page to render if 404 status code
+});
 
 
 /********************** Port Connection **********************/

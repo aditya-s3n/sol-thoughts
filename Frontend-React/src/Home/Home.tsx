@@ -1,22 +1,16 @@
 //import react modules
-import React, {useEffect, useState} from "react";
+import React from "react";
 //react components
 import Header from "../Header";
 import Title from "../Title";
 import Intro from "./components/Intro";
 import TopThreads from "./components/TopThreads";
 import Footer from "../Footer";
-//JS modules
-import domainName from "../domainName.js"
 
 
 //render HOME function
 //props: the 3 top threads and information
 function Home(props) {
-    console.log(props);
-    //top 3 threads variable
-    const [threadData, setThreadData] = useState(props.threadData);
-
 
 
     //Header: the navbar and title of the website
@@ -33,7 +27,7 @@ function Home(props) {
 
             <Intro />
 
-            <TopThreads threadArray={threadData}/>
+            <TopThreads threadArray={props.threadData}/>
 
             <Footer />
             

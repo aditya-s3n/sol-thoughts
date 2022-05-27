@@ -4,6 +4,7 @@ import React, {useEffect, useState, useRef} from "react";
 import Post from "./Post/Post";
 import Home from "./Home/Home";
 import Thread from "./Thread/Thread";
+import Page404 from "./Page404";
 //JS modules
 import domainName from "./domainName.js";
 //TESTING
@@ -17,10 +18,8 @@ function App() {
     
     //state to render page type
     const [page, setPage] = useState(null);
-    //reference the thread Data to render
+    //reference the thread Data to render (thread: thread page, post: post page, topThreads: home page)
     const threadDataReference = useRef(null);
-    //reference the 3 top threads for home page
-    const top3Threads = useRef(null);
 
     //receive what page to render
     useEffect(() => {
@@ -30,11 +29,15 @@ function App() {
             .then(data => {
                 //check if page is thread page
                 if (data.page === "Thread") {
-                    threadDataReference.current = data.threadData;
+                    threadDataReference.thread = data.threadData;
                 }
                 //check if page is home page
                 else if (data.page === "Home") {
-                    top3Threads.current = data.topThreads;
+                    threadDataReference.topThreads = data.topThreads;
+                }
+                //chck if page is post page
+                else if (data.page === "Post") {
+                    threadDataReference.post = data.threadData;
                 }
                 setPage(data.page); //set up which page to render
             });
@@ -43,19 +46,22 @@ function App() {
     //returns the Page to render
     switch (page) {
         case "Home": //home page
-            return <Home threadData={top3Threads.current}/>
+            return <Home threadData={threadDataReference.topThreads} />
             
         case "Thread": //thread page
-            return <Thread threadData={threadDataReference.current}/>    
+            return <Thread threadData={threadDataReference.thread} />    
 
         case "Post": //post page
-            return <Post />  
+            return <Post threadData={threadDataReference.post} />  
+
+        case "404": //404 page
+            return <Page404 />
             
         case "Test": //testing page (FOR DEBUGGING ONLY)
             return <Test />
         
         default: //reset
-            return <Post />  
+            return;
             
     }
 }
