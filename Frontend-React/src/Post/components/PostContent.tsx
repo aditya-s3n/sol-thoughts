@@ -6,7 +6,7 @@ import StringToJSX from "../../StringToJSX";
 //props: the content as a string
 function PostContent(props) {
     return (
-        <div>
+        <div className="container text-start my-5">
             <StringToJSX content={props.postContent} />
         </div>
     );

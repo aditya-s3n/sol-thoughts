@@ -11,7 +11,7 @@ const app = express();
 app.use(cors()); //set up CORS middleware
 const port = 3001;
 //mongoose configs
-mongo_URI = process.env.MONGO_URI; //get the URI to the mongo database from .env file
+const mongo_URI = process.env.MONGO_URI; //get the URI to the mongo database from .env file
 mongoose.connect("mongodb://localhost:27017/sunDB"); //TODO change to Atlas URI from .env
 
 
@@ -58,21 +58,20 @@ async function findTopThreads() {
     //return the top 3 threads in array
     return [threads[0], threads[1], threads[2]];
 }
-//add 1 to views of a certain thread
+//add 1 to views of a specific thread
 async function addViewToThread(route) {
     //get the thread document
     const thread = await findThread(route);
     //add one to views
-    thread.then(result => {
-        const updatedViews = result.views + 1;
-    });
+    const updatedViews = thread.views + 1;
+
     //update the thread document
-    await Thread.updateOne({ route: route }, { $set: { views: updatedViews }}, (err, res) => {
-        //check for error
-        if (err) {
-            console.log(err);
-        }
-    });
+    const response = await Thread.updateOne({ route: route }, { $set: { views: updatedViews } });
+
+    //check for erros
+    if (response.acknowledged === false) {
+        console.log(`Couldn't add view to ${route}`);
+    }
 }
 
 //insert a document thread
@@ -92,25 +91,52 @@ async function insertThread(name, route, postNum, complete, posts) {
 async function insertPostToThread(postObject, threadRoute) {
     //find the original posts array
     const originalThread = await findThread(threadRoute);
-    originalThread.then(result => { //resolve promise
-        const originalPosts = originalThread.posts; //get the posts
-    });
-    
 
+    const originalPosts = originalThread.posts;
     //insert new post with ES6 spread operator
     const updatedPosts = [...originalPosts, postObject]; //create the updated posts array
-    const updatePostsNum = originalPosts.postNum + 1; //create updated Posts Num
-    await Thread.updateOne({route: threadRoute}, { $set: { posts: updatedPosts, postNum: updatePostsNum } }, (err, res) => { //update the thread posts
-        if (err) { //check for error
-            console.log(err);
-        }
-        else { //no error
-            console.log(res);
-        }
-    });
+    const updatePostsNum = originalThread.postNum + 1; //create updated Posts Num
+
+    //update the thread with the new posts
+    const response = await Thread.updateOne({route: threadRoute}, { $set: { posts: updatedPosts, postNum: updatePostsNum } });
+    
+    //check for errors
+    if (response.acknowledged === true) {
+        console.log(`Added Post to ${threadRoute}`);
+    }
+    else {
+        console.log("Something went wrong");
+    }
 }
 
+// post2 = {
+//     title: "Example Post 1",
+//     content: `<h3>Introduction</h3>
+//     <hr />
 
+//     <p>Aditya is my name.</p>
+//     <br />
+//     <p>This is my personal blog website, where I just post anything from projects that I’m doing to me just talking about my opinion on certain subjects, rants you might call it. I’ll make an effort to remain transparent in everything I do, as trust is a two-way relationship, but no promises :) LOL. I mean it’s like the Japanese proverb, “The first face, you show to the world. The second face, you show to your close friends, and your family. The third face, you never show anyone,” and technology, especially social media, allows a person to show their first face to the world.</p>
+
+//     <br />
+//     <p>Though you can trust me :)</p>
+    
+//     <img id="pfp" height="150" width="150" src="https://thumbor.forbes.com/thumbor/200x200/smart/filters:format(jpeg)/https%3A%2F%2Fspecials-images.forbesimg.com%2Fimageserve%2F5c76b7d331358e35dd2773a9%2F416x416.jpg%3Fbackground%3D000000%26cropX1%3D0%26cropX2%3D4401%26cropY1%3D0%26cropY2%3D4401" alt="pfp" />
+    
+
+//     <p>^ that's me</p>
+
+//     <br />
+//     <p>Maybe I’ll live to regret what I post here, people always did tell me to be careful what you post on the internet as it stays there forever and they are not wrong, but with the advent of social media that advice is barely followed. So screw it I guess.</p>
+
+//     <br />
+//     <p>I hope non-video content and media doesn’t bore people too much.</p>
+
+//     <br />
+//     <p>Browse to your heart's content :)</p>`,
+//     contentTag: ["Text", "Images"]
+// }
+// insertPostToThread(post2, "thread-3");
 /********************** Routing **********************/
 // route (/)
 app.get("/", (req, res) => {
@@ -145,7 +171,14 @@ app.get("/threads/:threadRoute", (req, res) => {
 
     foundThread //resolve promise
         .then(value => {
+            //check if found thread
+            if (value === null) {
+                res.json({page: "404"}); //send 404 page when can't find thread
+            }
+            else {
+                addViewToThread(threadID); //add one view to thread
             res.json({page: "Post", threadData: value}); //send data to render post page with all the posts
+            }
         })  
         .catch(err => {
             res.json({page: "404"}); //render the 404 page when can't find any thread
@@ -162,7 +195,6 @@ app.route("/test")
 app.get("*", (req, res) => { //any route, KEEP LAST
     res.status(404).json({page: "404"}); //send 404 page to render if 404 status code
 });
-
 
 /********************** Port Connection **********************/
 app.listen(port, () => {

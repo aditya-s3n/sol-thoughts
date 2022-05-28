@@ -4,14 +4,19 @@ import React from "react";
 import Tag from "../../Tag";
 
 //render PostTag
-function PostTag() {
+//props: array of tags to render
+function PostTag(props) {
     return (
 
         <div className="container mt-2">
-            <Tag completeTag={false} title={"Text"} />
-            <Tag completeTag={false} title={"Video"} />
-            <Tag completeTag={false} title={"Images"} />
-            <Tag completeTag={false} title={"Dynamic"} />
+
+            {
+                //render each of the tags
+                props.tags.map(value => {
+                    return <Tag completeTag={false} title={value} />
+                })
+            }
+        
         </div>
 
     );

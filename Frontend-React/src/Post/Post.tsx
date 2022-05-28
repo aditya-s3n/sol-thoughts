@@ -1,5 +1,5 @@
 //react modules
-import React, {useState, useEffect} from "react";
+import React, {useState, useRef} from "react";
 //react components
 import Header from "../Header";
 import Footer from "../Footer";
@@ -12,7 +12,7 @@ import PostTag from "./components/PostTags";
 //props: thread data with all the posts [object]
 function Post(props) {
     //create state for which post to render
-    const [post, setPost] = useState(null);
+    const [postInfo, setPostInfo] = useState(props.threadData.posts[0]); //get the first post from the thread data object
 
     return (
         <div>
@@ -28,10 +28,14 @@ function Post(props) {
                         <div className="ms-auto mt-5">
 
                             <select className="form-select form-select-lg" aria-label="Default select example">
-                                <option value="0">Open this select menu</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+
+                                {
+                                    //make all the post titles an option to switch to
+                                    props.threadData.posts.map((value, index) => {
+                                        return <option value={index}>{value.title}</option>
+                                    })
+                                }
+                        
                             </select>
 
                         </div>
@@ -39,18 +43,18 @@ function Post(props) {
                     </div>
 
                     <div className="col ms-auto mt-5">
-                        <Tag complete={true} completeTag={true} />
+                        <Tag complete={props.threadData.complete} completeTag={true} />
                     </div>
 
                 </div>
 
             </div>
 
-            <Title title="Post Title" center={false} />
+            <Title title={postInfo.title} center={false} />
 
-            <PostTag />
+            <PostTag tags={postInfo.contentTag} />
 
-            {/* <PostContent /> */}
+            <PostContent postContent={postInfo.content}/>
 
             <Footer />
 
