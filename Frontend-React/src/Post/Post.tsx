@@ -1,5 +1,5 @@
 //react modules
-import React, {useState, useRef} from "react";
+import React, {useState} from "react";
 //react components
 import Header from "../Header";
 import Footer from "../Footer";
@@ -13,7 +13,7 @@ import PostTag from "./components/PostTags";
 function Post(props) {
     //create state for which post to render
     const [postInfo, setPostInfo] = useState(props.threadData.posts[0]); //get the first post from the thread data object
-    console.log(postInfo);
+    
     return (
         <div>
             
@@ -27,7 +27,11 @@ function Post(props) {
                         {/* option menu */}
                         <div className="ms-auto mt-5">
 
-                            <select className="form-select form-select-lg" aria-label="Default select example">
+                            <select className="form-select form-select-lg" aria-label="Default select example" id="post-selector"
+                            onChange={event => {
+                                //set the new option value to post info
+                                return setPostInfo(props.threadData.posts[event.target.value]);
+                            }}>
 
                                 {
                                     //make all the post titles an option to switch to
