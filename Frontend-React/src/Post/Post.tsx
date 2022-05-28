@@ -13,7 +13,7 @@ import PostTag from "./components/PostTags";
 function Post(props) {
     //create state for which post to render
     const [postInfo, setPostInfo] = useState(props.threadData.posts[0]); //get the first post from the thread data object
-
+    console.log(postInfo);
     return (
         <div>
             

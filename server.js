@@ -75,13 +75,13 @@ async function addViewToThread(route) {
 }
 
 //insert a document thread
-async function insertThread(name, route, postNum, complete, posts) {
+async function insertThread(name, route, complete, posts) {
     const newThread = new Thread({
         name: name,
         route: route,
-        postNum: postNum,
+        postNum: posts.length,
         complete: complete,
-        views: posts.length,
+        views: 0,
         posts: posts
     });
 
@@ -95,7 +95,7 @@ async function insertPostToThread(postObject, threadRoute) {
     const originalPosts = originalThread.posts;
     //insert new post with ES6 spread operator
     const updatedPosts = [...originalPosts, postObject]; //create the updated posts array
-    const updatePostsNum = originalThread.postNum + 1; //create updated Posts Num
+    const updatePostsNum = updatedPosts.length; //create updated Posts Num
 
     //update the thread with the new posts
     const response = await Thread.updateOne({route: threadRoute}, { $set: { posts: updatedPosts, postNum: updatePostsNum } });
@@ -108,35 +108,33 @@ async function insertPostToThread(postObject, threadRoute) {
         console.log("Something went wrong");
     }
 }
+//fail safe deleting a post from a thread
+async function deletePostFromThread(threadRoute, postTitle) {
+    //get the thread
+    const originalThread = await findThread(threadRoute);
 
-// post2 = {
-//     title: "Example Post 1",
-//     content: `<h3>Introduction</h3>
-//     <hr />
+    //find the post array and delete the post
+    let updatedPosts = originalThread.posts;
+    let updatedViews = originalThread.views;
+    for (let i = 0; i < updatedPosts.length; i++) { //iterate through the array to find the specfic post
+        if (updatedPosts[i].title === postTitle) { //check for each title of each post
+            updatedPosts.splice(i, 1); //delete the index where the post it
+            updatedViews = updatedPosts.length; //decrease the length of the posts
+        }
+    }
 
-//     <p>Aditya is my name.</p>
-//     <br />
-//     <p>This is my personal blog website, where I just post anything from projects that I’m doing to me just talking about my opinion on certain subjects, rants you might call it. I’ll make an effort to remain transparent in everything I do, as trust is a two-way relationship, but no promises :) LOL. I mean it’s like the Japanese proverb, “The first face, you show to the world. The second face, you show to your close friends, and your family. The third face, you never show anyone,” and technology, especially social media, allows a person to show their first face to the world.</p>
+    //update the thread document
+    const response = await Thread.updateOne({ route: threadRoute }, { $set: { posts: updatedPosts, postNum: updatedViews } });
+    //check for errors
+    if (response.acknowledged === true) {
+        console.log(`Deleted ${postTitle} from ${threadRoute}`);
+    }
+    else {
+        console.log("Error occured, couldn't delete post");
+    }
+}
 
-//     <br />
-//     <p>Though you can trust me :)</p>
-    
-//     <img id="pfp" height="150" width="150" src="https://thumbor.forbes.com/thumbor/200x200/smart/filters:format(jpeg)/https%3A%2F%2Fspecials-images.forbesimg.com%2Fimageserve%2F5c76b7d331358e35dd2773a9%2F416x416.jpg%3Fbackground%3D000000%26cropX1%3D0%26cropX2%3D4401%26cropY1%3D0%26cropY2%3D4401" alt="pfp" />
-    
 
-//     <p>^ that's me</p>
-
-//     <br />
-//     <p>Maybe I’ll live to regret what I post here, people always did tell me to be careful what you post on the internet as it stays there forever and they are not wrong, but with the advent of social media that advice is barely followed. So screw it I guess.</p>
-
-//     <br />
-//     <p>I hope non-video content and media doesn’t bore people too much.</p>
-
-//     <br />
-//     <p>Browse to your heart's content :)</p>`,
-//     contentTag: ["Text", "Images"]
-// }
-// insertPostToThread(post2, "thread-3");
 /********************** Routing **********************/
 // route (/)
 app.get("/", (req, res) => {
@@ -177,7 +175,7 @@ app.get("/threads/:threadRoute", (req, res) => {
             }
             else {
                 addViewToThread(threadID); //add one view to thread
-            res.json({page: "Post", threadData: value}); //send data to render post page with all the posts
+                res.json({page: "Post", threadData: value}); //send data to render post page with all the posts
             }
         })  
         .catch(err => {
