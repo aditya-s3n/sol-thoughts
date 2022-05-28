@@ -12,7 +12,8 @@ app.use(cors()); //set up CORS middleware
 const port = 3001;
 //mongoose configs
 const mongo_URI = process.env.MONGO_URI; //get the URI to the mongo database from .env file
-mongoose.connect("mongodb://localhost:27017/sunDB"); //TODO change to Atlas URI from .env
+const mongo_local = "mongodb://localhost:27017/sunDB"; //local connection to the mongoDB server
+mongoose.connect(mongo_local); //connect to MongoDB Atlas
 
 
 /********************** MongoDB (Database) **********************/
@@ -74,65 +75,6 @@ async function addViewToThread(route) {
     }
 }
 
-//insert a document thread
-async function insertThread(name, route, complete, posts) {
-    const newThread = new Thread({
-        name: name,
-        route: route,
-        postNum: posts.length,
-        complete: complete,
-        views: 0,
-        posts: posts
-    });
-
-    await newThread.save().then(() => console.log("Added new Thread to Database"));
-}
-//insert new post into exisitng thread
-async function insertPostToThread(postObject, threadRoute) {
-    //find the original posts array
-    const originalThread = await findThread(threadRoute);
-
-    const originalPosts = originalThread.posts;
-    //insert new post with ES6 spread operator
-    const updatedPosts = [...originalPosts, postObject]; //create the updated posts array
-    const updatePostsNum = updatedPosts.length; //create updated Posts Num
-
-    //update the thread with the new posts
-    const response = await Thread.updateOne({route: threadRoute}, { $set: { posts: updatedPosts, postNum: updatePostsNum } });
-    
-    //check for errors
-    if (response.acknowledged === true) {
-        console.log(`Added Post to ${threadRoute}`);
-    }
-    else {
-        console.log("Something went wrong");
-    }
-}
-//fail safe deleting a post from a thread
-async function deletePostFromThread(threadRoute, postTitle) {
-    //get the thread
-    const originalThread = await findThread(threadRoute);
-
-    //find the post array and delete the post
-    let updatedPosts = originalThread.posts;
-    let updatedViews = originalThread.views;
-    for (let i = 0; i < updatedPosts.length; i++) { //iterate through the array to find the specfic post
-        if (updatedPosts[i].title === postTitle) { //check for each title of each post
-            updatedPosts.splice(i, 1); //delete the index where the post it
-            updatedViews = updatedPosts.length; //decrease the length of the posts
-        }
-    }
-
-    //update the thread document
-    const response = await Thread.updateOne({ route: threadRoute }, { $set: { posts: updatedPosts, postNum: updatedViews } });
-    //check for errors
-    if (response.acknowledged === true) {
-        console.log(`Deleted ${postTitle} from ${threadRoute}`);
-    }
-    else {
-        console.log("Error occured, couldn't delete post");
-    }
-}
 
 
 /********************** Routing **********************/
@@ -193,6 +135,7 @@ app.route("/test")
 app.get("*", (req, res) => { //any route, KEEP LAST
     res.status(404).json({page: "404"}); //send 404 page to render if 404 status code
 });
+
 
 /********************** Port Connection **********************/
 app.listen(port, () => {
