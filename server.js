@@ -13,7 +13,7 @@ const port = 3001;
 //mongoose configs
 const mongo_URI = process.env.MONGO_URI; //get the URI to the mongo database from .env file
 const mongo_local = "mongodb://localhost:27017/sunDB"; //local connection to the mongoDB server
-mongoose.connect(mongo_local); //connect to MongoDB Atlas
+mongoose.connect(mongo_URI); //connect to MongoDB Atlas
 
 
 /********************** MongoDB (Database) **********************/
@@ -125,11 +125,11 @@ app.get("/threads/:threadRoute", (req, res) => {
         });
 });
 
-/*** Testing HTML Pages ***/
-app.route("/test")
-    .get((req, res) => {
-        res.json({page: "Test"});
-    });
+// /*** Testing HTML Pages ***/
+// app.route("/test")
+//     .get((req, res) => {
+//         res.json({page: "Test"});
+//     });
 
 //route 404
 app.get("*", (req, res) => { //any route, KEEP LAST
