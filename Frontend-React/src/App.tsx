@@ -15,7 +15,7 @@ import Test from "./TESTING/Test";
 function App() {
     //get and save the pathname
     let pathName = window.location.pathname;
-    console.log(pathName);
+
     //state to render page type
     const [page, setPage] = useState(null);
     //reference the thread Data to render (thread: thread page, post: post page, topThreads: home page)
