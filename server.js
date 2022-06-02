@@ -9,7 +9,6 @@ require('dotenv').config();
 //express configs
 const app = express();
 app.use(cors()); //set up CORS middleware
-const port = 3001;
 //mongoose configs
 const mongo_URI = process.env.MONGO_URI; //get the URI to the mongo database from .env file
 const mongo_local = "mongodb://localhost:27017/sunDB"; //local connection to the mongoDB server
@@ -138,6 +137,6 @@ app.get("*", (req, res) => { //any route, KEEP LAST
 
 
 /********************** Port Connection **********************/
-app.listen(port, () => {
-    console.log(`Server Started on Port ${port}`);
+app.listen(process.env.PORT || port, () => {
+    console.log(`Server Started on Port ${process.env.PORT}`);
 });
