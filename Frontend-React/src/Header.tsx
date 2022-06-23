@@ -14,10 +14,16 @@ function Header() {
                     <span className="navbar-toggler-icon"></span>
                 </button>
 
+    
+                
+                
+
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                    
+                    {/* <span className="mx-auto">Hello</span> */}
 
-                    <ul className="navbar-nav ms-auto">
-
+                    <ul className="ms-0 navbar-nav ms-auto">
+                    
                         <li className="nav-item">
                             <a className="nav-link active" aria-current="page" href="/">Home</a>
                         </li>

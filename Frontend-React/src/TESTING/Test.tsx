@@ -1,52 +1,28 @@
 //react modules
-import React, {useState} from "react";
-import ReactDOMServer from "react-dom/server"
-import StringToJSX from "../StringToJSX";
+import React from "react";
+//import StringToJSX from "../StringToJSX";
 
 //render Test code
 function Test() {
-    const button = "pfp";
-    const action = "showImageBtn";
-    const [showImage, setShowImage] = useState(false);
-
-    const scriptID = [
-        {}
-    ]
-    let content = `<div className="text-center">
-
-    <h3>Introduction</h3>
-    <hr />
-
-    <p>Aditya is my name.</p>
-    <br />
-    <p>This is my personal blog website, where I just post anything from projects that I’m doing to me just talking about my opinion on certain subjects, rants you might call it. I’ll make an effort to remain transparent in everything I do, as trust is a two-way relationship, but no promises :) LOL. I mean it’s like the Japanese proverb, “The first face, you show to the world. The second face, you show to your close friends, and your family. The third face, you never show anyone,” and technology, especially social media, allows a person to show their first face to the world.</p>
-
-    <br />
-    <p>Though you can trust me :)</p>
     
-    <img id="pfp" height="150" width="150" src="https://thumbor.forbes.com/thumbor/200x200/smart/filters:format(jpeg)/https%3A%2F%2Fspecials-images.forbesimg.com%2Fimageserve%2F5c76b7d331358e35dd2773a9%2F416x416.jpg%3Fbackground%3D000000%26cropX1%3D0%26cropX2%3D4401%26cropY1%3D0%26cropY2%3D4401" alt="pfp" />
     
-
-    <p>^ that's me</p>
-
-    <br />
-    <p>Maybe I’ll live to regret what I post here, people always did tell me to be careful what you post on the internet as it stays there forever and they are not wrong, but with the advent of social media that advice is barely followed. So screw it I guess.</p>
-
-    <br />
-    <p>I hope non-video content and media doesn’t bore people too much.</p>
-
-    <br />
-    <p>Browse to your heart's content :)</p>
-
-</div>`
-    
-    let element = ReactDOMServer.renderToStaticMarkup(content)
     
     return (
-        // ReactDOMServer.renderToReadableStream(element)
-        // <div dangerouslySetInnerHTML={{ __html: element }} ></div>
-        <StringToJSX content={content} />
-        // element
+        <div>
+            
+            <p>For the deployment I used Firebase, specifically firebase hosting.</p>
+
+            <p>I wanted to deploy the whole firebase full-stack (front, and backend) through firebase, but I realized that firebase functions require a credit-card to be able to use, after like 3 hours of work. SO that was fun, and I felt really dumb LOL.</p>
+
+            <p>I decided to use firebase, only for the front-end. So I would run and build the React app to be run on firebase hosting, while I set up the back-end express server on another platform. That platform was <a href="https://www.heroku.com/">Heroku</a>. Heroku is easy to use and efficient in many back-end services, so I was the perfect place from my back-end server to be and set up to get requests from my front-end website.</p>
+
+            <p>Though if you ever used Heroku on the free tier, you’ll realize that Heroku to conserve space puts unused free apps “on sleep” that requires to be woken up, which takes around 4 seconds, to send and receive data. 4 seconds to wake up is waay too much time that anyone would wait for a website to load. Though if your heroku app gets a request within 20 - 30 minutes the app will stay awake. So if you use services like <a href="https://kaffeine.herokuapp.com/">kaffeine.herokuapp.com</a> your heroku app will stay awake indefinitely.</p>
+
+            <p>But do you using heroku now I have 2 domains for 1 website, a back-end and front-end</p>
+
+            <p><strong>Front-end:</strong> <a href="https://sol-thoughts.web.app">https://sol-thoughts.web.app</a></p>
+            <p><strong>Back-end API:</strong> <a href="https://sol-thoughts-backend.herokuapp.com/">https://sol-thoughts-backend.herokuapp.com/</a></p>
+        </div>  
     );
 }
 

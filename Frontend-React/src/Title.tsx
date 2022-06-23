@@ -7,7 +7,7 @@ function Title(props) {
     return (
         <div className={props.center ? "container mt-2 text-center" : "container mt-2"} id="Title">
             <h2 className="display-4 my-4">{props.title}</h2>
-            <hr style={{"width": "50%"}} className={props.center ? "mx-auto" : "me-auto"}/>
+            <hr className={props.center ? "mx-auto" : "me-auto"}/>
         </div>
     );
 }

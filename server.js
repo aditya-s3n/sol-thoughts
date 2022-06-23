@@ -124,11 +124,11 @@ app.get("/threads/:threadRoute", (req, res) => {
         });
 });
 
-// /*** Testing HTML Pages ***/
-// app.route("/test")
-//     .get((req, res) => {
-//         res.json({page: "Test"});
-//     });
+/*** Testing HTML Pages ***/
+app.route("/test")
+    .get((req, res) => {
+        res.json({page: "Test"});
+    });
 
 //route 404
 app.get("*", (req, res) => { //any route, KEEP LAST
@@ -137,6 +137,6 @@ app.get("*", (req, res) => { //any route, KEEP LAST
 
 
 /********************** Port Connection **********************/
-app.listen(process.env.PORT || port, () => {
+app.listen(process.env.PORT, () => {
     console.log(`Server Started on Port ${process.env.PORT}`);
 });

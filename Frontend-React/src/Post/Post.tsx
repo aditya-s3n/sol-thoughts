@@ -7,25 +7,31 @@ import Title from "../Title";
 import Tag from "../Tag";
 import PostContent from "./components/PostContent";
 import PostTag from "./components/PostTags";
+import PostTitle from "./components/PostTitle";
 
 //render Post function
 //props: thread data with all the posts [object]
 function Post(props) {
     //create state for which post to render
     const [postInfo, setPostInfo] = useState(props.threadData.posts[0]); //get the first post from the thread data object
-    
+
     return (
         <div>
             
             <Header />
+            
+            <Title title={props.threadData.name} center={false} />
 
+            
+
+            
             <div className="container">
 
                 <div className="row">
 
                     <div className="col">
                         {/* option menu */}
-                        <div className="ms-auto mt-5">
+                        <div className="ms-auto">
 
                             <select className="form-select form-select-lg" aria-label="Default select example" id="post-selector"
                             onChange={event => {
@@ -45,18 +51,34 @@ function Post(props) {
                         </div>
                     
                     </div>
-
-                    <div className="col ms-auto mt-5">
+                    
+                    <div className="col ms-auto">
                         <Tag complete={props.threadData.complete} completeTag={true} />
+                    </div>
+                    
+                    
+                </div>
+                <hr />
+            </div>
+
+            
+            
+            <div className=" container">
+
+                <div className="row">
+                    
+                    <div className="col my-2">
+                        <PostTitle title={postInfo.title} />
+                    </div>
+
+                    <div className="col my-1 text-end">
+                        <PostTag tags={postInfo.contentTag} />
                     </div>
 
                 </div>
-
+                
             </div>
-
-            <Title title={postInfo.title} center={false} />
-
-            <PostTag tags={postInfo.contentTag} />
+            
 
             <PostContent postContent={postInfo.content}/>
 
