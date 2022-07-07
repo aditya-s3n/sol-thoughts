@@ -5,6 +5,7 @@ import Header from "../Header";
 import Title from "../Title";
 import ThreadRow from "./components/ThreadRow";
 import Footer from "../Footer";
+import Notfication from "../Notfications/Notification";
 
 
 //render Thread function
@@ -19,6 +20,8 @@ function Thread(props) {
         <div>
 
             <Header />
+            
+            <Notfication />
             
             <Title title="Threads" center={false}/>
 

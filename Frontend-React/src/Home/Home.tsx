@@ -6,7 +6,7 @@ import Title from "../Title";
 import Intro from "./components/Intro";
 import TopThreads from "./components/TopThreads";
 import Footer from "../Footer";
-
+import Notification from "../Notfications/Notification";
 
 //render HOME function
 //props: the 3 top threads and information
@@ -22,6 +22,8 @@ function Home(props) {
         <div>
             
             <Header />
+
+            <Notification />
 
             <Title title={`Welcome!`} center={true}/>
 
