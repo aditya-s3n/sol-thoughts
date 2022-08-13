@@ -13,7 +13,7 @@ function PostTag(props) {
             {
                 //render each of the tags
                 props.tags.map(value => {
-                    return <Tag completeTag={false} title={value} />
+                    return <Tag completeTag={false} title={value} className="btn btn-primary mx-2"/>
                 })
             }
         
