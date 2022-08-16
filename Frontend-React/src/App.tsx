@@ -6,7 +6,7 @@ import Home from "./Home/Home";
 import Thread from "./Thread/Thread";
 import Page404 from "./Page404";
 //JS modules
-import domainName from "./domainName.js";
+import domainName from "./utils/domainName.js";
 //TESTING
 import Test from "./TESTING/Test";
 

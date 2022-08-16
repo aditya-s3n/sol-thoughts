@@ -15,12 +15,14 @@ function ThreadCard(props) {
             <div className="card-body">
 
             {/* href={`/threads/${props.route}`} */}
-                <button type="button" data-bs-toggle="modal" className="btn btn-link p-0" data-bs-target={`#${props.route}Modal`}>
+            <a href={`/threads/${props.route}`}>
+                <button type="button" to="" data-bs-toggle="modal" className="btn btn-link p-0" data-bs-target={`#${props.route}Modal`}>
                 
                     <h5 className="card-title text-decoration-underline">{props.title}</h5>
 
                 </button>
-                
+            </a>
+            
                 <hr />
                 <p className="card-text"><strong>Posts:</strong> {props.numOfPosts}</p>
                 
@@ -36,7 +38,7 @@ function ThreadCard(props) {
             </div>
             
 
-            <ThreadModal title={props.title} route={props.route} />
+            {/* <ThreadModal title={props.title} route={props.route} /> */}
 
         </div>
         
