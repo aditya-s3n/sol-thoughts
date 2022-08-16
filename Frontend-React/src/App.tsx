@@ -9,6 +9,7 @@ import Page404 from "./Page404";
 import domainName from "./utils/domainName.js";
 //TESTING
 import Test from "./TESTING/Test";
+import { storePageVisitsGA } from "./utils/googleAnalytics";
 
 
 //send App render function
@@ -40,6 +41,9 @@ function App() {
                     threadDataReference.post = data.threadData;
                 }
                 setPage(data.page); //set up which page to render
+
+                //send page data to GA
+                storePageVisitsGA();
             });
     }, [pathName]);
 
