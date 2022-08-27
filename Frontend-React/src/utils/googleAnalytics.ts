@@ -2,7 +2,7 @@
 import ReactGA from "react-ga4";
 
 //start storing analytics
-ReactGA.initialize(process.env.REACT_APP_GA_MEASUREMENT_ID);
+ReactGA.initialize("G-M2DMGD04NG");
 
 //store the page view on google analytics
 function storePageVisitsGA() {

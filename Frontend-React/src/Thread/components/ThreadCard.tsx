@@ -2,7 +2,7 @@
 import React from "react"
 //react components
 import Tag from "../../Tag";
-import ThreadModal from "./ThreadModal";
+// import ThreadModal from "./ThreadModal";
 
 //render ThreadCard function
 //props: title of the card, number of posts in the thread, if the card is complete for ongoing, route for the thread
@@ -33,7 +33,7 @@ function ThreadCard(props) {
 
                 <Tag complete={props.complete} completeTag={true} />
 
-                <Tag completeTag={false} title={"LOCKED"} className="btn btn-primary mx-2"/>
+                {/* <Tag completeTag={false} title={"LOCKED"} className="btn btn-primary mx-2"/> */}
 
             </div>
             
