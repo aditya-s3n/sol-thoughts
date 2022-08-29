@@ -10,6 +10,7 @@ import domainName from "./utils/domainName.js";
 //TESTING
 import Test from "./TESTING/Test";
 import { storePageVisitsGA } from "./utils/googleAnalytics";
+import Loading from "./Loading/Loading";
 
 
 //send App render function
@@ -62,10 +63,10 @@ function App() {
             return <Page404 />
             
         case "Test": //testing page (FOR DEBUGGING ONLY)
-            return <Test />
+            return <Loading />
         
         default: //reset
-            return;
+            return <Loading />;
             
     }
 }
