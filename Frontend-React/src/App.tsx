@@ -63,7 +63,7 @@ function App() {
             return <Page404 />
             
         case "Test": //testing page (FOR DEBUGGING ONLY)
-            return <Loading />
+            return <Test />
         
         default: //reset
             return <Loading />;
