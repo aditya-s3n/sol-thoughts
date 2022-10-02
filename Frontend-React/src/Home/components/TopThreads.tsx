@@ -5,7 +5,7 @@ import ViewThreads from "./ViewThreads";
 
 //render TopThreads function
 //props: array of the threads
-function TopThreads(props) {
+function TopThreads({ threadArray }) {
 
     return (
         <div className="text-center">
@@ -22,17 +22,38 @@ function TopThreads(props) {
                 <tbody>
                     <tr>
                         <th scope="row">1</th>
-                            <td><a href={`/threads/${props.threadArray[0].route}`}>{props.threadArray[0].name}</a></td>
+                            <td>
+                                {
+                                //render top threads if avaliable 
+                                threadArray 
+                                ? <a href={`/threads/${threadArray[0].route}`}>{threadArray[0].name}</a>
+                                : <p className="placeholder-glow"><span className="placeholder col-11"></span></p>
+                                }
+                            </td>
                     </tr>
 
                     <tr>
                         <th scope="row">2</th>
-                            <td><a href={`/threads/${props.threadArray[1].route}`}>{props.threadArray[1].name}</a></td>
+                            <td>
+                                {
+                                //render top threads if avaliable 
+                                threadArray 
+                                ? <a href={`/threads/${threadArray[1].route}`}>{threadArray[1].name}</a>
+                                : <p className="placeholder-glow"><span className="placeholder col-11"></span></p>
+                                }
+                            </td>
                     </tr>
 
                     <tr>
                         <th scope="row">3</th>
-                            <td><a href={`/threads/${props.threadArray[2].route}`}>{props.threadArray[2].name}</a></td>
+                            <td>
+                                {
+                                //render top threads if avaliable 
+                                threadArray 
+                                ? <a href={`/threads/${threadArray[2].route}`}>{threadArray[2].name}</a>
+                                : <p className="placeholder-glow"><span className="placeholder col-11"></span></p>
+                                }
+                            </td>
                     </tr>
                 </tbody>
 
