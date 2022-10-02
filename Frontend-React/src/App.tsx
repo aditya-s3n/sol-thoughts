@@ -21,9 +21,6 @@ function renderPage(pathName) {
         //split it into array
         const paths = pathName.split("/");
         paths.shift();
-        console.log(paths);
-        console.log(paths[0]);
-        console.log(paths.length === 1 && (paths[0] === "threads" || paths[0] === "posts"))
 
         //threads page
         if (paths.length === 1 && (paths[0] === "threads" || paths[0] === "posts")) {
