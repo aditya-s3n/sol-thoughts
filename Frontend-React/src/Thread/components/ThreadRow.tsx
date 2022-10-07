@@ -13,6 +13,8 @@ function ThreadRow(props) {
             <div className="row row-cols-3">
                     
                 {
+                props.array &&
+                    
                 props.array.map((value) => {
                     return (
                         <div className="col my-4">
@@ -27,9 +29,31 @@ function ThreadRow(props) {
                         </div>
                     );
                 })
+                
                 }
-
             </div>
+
+
+            {
+            props.array 
+
+            ? null
+
+            :
+            <div className="row row-cols-3">
+                <div className="col">
+                    <ThreadCard />
+                </div>
+
+                <div className="col">
+                    <ThreadCard />
+                </div>
+
+                <div className="col">
+                    <ThreadCard />
+                </div>
+            </div>
+            }
 
         </div>
 

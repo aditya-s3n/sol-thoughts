@@ -9,36 +9,55 @@ import Tag from "../../Tag";
 function ThreadCard(props) {
 
     return (
-
         <div className="card">
 
-            <div className="card-body">
+            {
+                props.route ?
+                <div className="card-body">
 
-            {/* href={`/threads/${props.route}`} */}
-                <a href={`/threads/${props.route}`}>
-                    <button type="button" to="" data-bs-toggle="modal" className="btn btn-link p-0" data-bs-target={`#${props.route}Modal`}>
+                    {/* href={`/threads/${props.route}`} */}
+                    <a href={`/threads/${props.route}`}>
+                        <button type="button" to="" data-bs-toggle="modal" className="btn btn-link p-0" data-bs-target={`#${props.route}Modal`}>
+                        
+                            <h5 className="card-title text-decoration-underline">{props.title}</h5>
+
+                        </button>
+                    </a>
+                
+                    <hr />
+                    <p className="card-text"><strong>Posts:</strong> {props.numOfPosts}</p>
                     
-                        <h5 className="card-title text-decoration-underline">{props.title}</h5>
+                    <div className="fs-6 mb-4">
+                        <i class="bi bi-eye-fill me-1"></i> {props.views}
+                    </div>
+                    
 
-                    </button>
-                </a>
-            
-                <hr />
-                <p className="card-text"><strong>Posts:</strong> {props.numOfPosts}</p>
-                
-                <div className="fs-6 mb-4">
-                    <i class="bi bi-eye-fill me-1"></i> {props.views}
+                    <Tag complete={props.complete} completeTag={true} />
+
+                    {/* <Tag completeTag={false} title={"LOCKED"} className="btn btn-primary mx-2"/> */}
+
                 </div>
+
+                :
+                <div className="card-body">
+
+                    <h5 class="card-title placeholder-glow">
+                        <span class="placeholder col-6"></span>
+                    </h5>
                 
+                    <hr />
 
-                <Tag complete={props.complete} completeTag={true} />
+                    <p class="card-text placeholder-glow">
+                        <span class="placeholder col-7 me-2"></span>
+                        <span class="placeholder col-4"></span>
+                        <span class="placeholder col-4 me-2"></span>
+                        <span class="placeholder col-6"></span>
 
-                {/* <Tag completeTag={false} title={"LOCKED"} className="btn btn-primary mx-2"/> */}
-
-            </div>
-            
-
-            {/* <ThreadModal title={props.title} route={props.route} /> */}
+                        <button tabindex="-1" class="btn btn-primary disabled placeholder col-3 mt-4" aria-hidden="true"></button>
+                    </p>
+                
+                </div>
+            }
 
         </div>
         

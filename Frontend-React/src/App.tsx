@@ -50,6 +50,7 @@ function App() {
     //reference the thread Data to render (thread: thread page, post: post page, topThreads: home page)
     const threadDataReference = useRef(null);
 
+    console.log(gotData);
     //receive what page to render
     useEffect(() => {
         //fetch the page to render
