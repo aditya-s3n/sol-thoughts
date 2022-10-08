@@ -13,16 +13,47 @@ function ThreadRow(props) {
             <div className="row row-cols-3">
                     
                 {
+                props.array &&
+                    
                 props.array.map((value) => {
                     return (
                         <div className="col my-4">
-                            <ThreadCard title={value.name} numOfPosts={value.postNum} complete={value.complete} key={value._id} route={value.route} views={value.views}/>
+                            <ThreadCard 
+                                title={value.name} 
+                                numOfPosts={value.postNum} 
+                                complete={value.complete} 
+                                key={value._id} 
+                                route={value.route} 
+                                views={value.views}
+                            />
                         </div>
                     );
                 })
+                
                 }
-
             </div>
+
+
+            {
+            props.array 
+
+            ? null
+
+            :
+            <div className="row row-cols-3">
+                <div className="col">
+                    <ThreadCard />
+                </div>
+
+                <div className="col">
+                    <ThreadCard />
+                </div>
+
+                <div className="col">
+                    <ThreadCard />
+                </div>
+            </div>
+            }
 
         </div>
 

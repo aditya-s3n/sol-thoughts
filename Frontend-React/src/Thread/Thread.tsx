@@ -10,7 +10,7 @@ import Notfication from "../Notfications/Notification";
 
 //render Thread function
 //props: the thread data in array form
-function Thread(props) {
+function Thread({ threadData }) {
 
     //Header: the navbar and title of the website
     //Title: title component
@@ -25,7 +25,8 @@ function Thread(props) {
             
             <Title title="Threads" center={false}/>
 
-            <ThreadRow array={props.threadData} />
+            <ThreadRow array={threadData} />
+            
 
             <Footer />
 
