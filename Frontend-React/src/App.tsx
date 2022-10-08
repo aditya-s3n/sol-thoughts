@@ -10,6 +10,7 @@ import domainName from "./utils/domainName.js";
 import { storePageVisitsGA } from "./utils/googleAnalytics";
 //TESTING
 import Test from "./TESTING/Test";
+import PostLoading from "./Post/PostLoading";
 
 //function to get which page to render on client
 function renderPage(pathName) {
@@ -57,6 +58,7 @@ function App() {
         fetch(`${domainName}${pathName}`)
                 .then(response => response.json()) //convert JSON to JS objection
                 .then(data => {
+                    console.log(data);
                     //check if page is thread page
                     if (data.page === "Thread") {
                         threadDataReference.thread = data.threadData;
@@ -89,7 +91,12 @@ function App() {
             return <Thread threadData={threadDataReference.thread} />    
 
         case "Post": //post page
-            return <Post threadData={threadDataReference.post} />  
+            if (gotData) {
+                return <Post threadData={threadDataReference.post} />  
+            } else {
+                return <PostLoading />;
+            }
+            
 
         case "404": //404 page
             return <Page404 />
