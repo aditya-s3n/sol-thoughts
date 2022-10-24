@@ -14,7 +14,7 @@ function Notfication() {
                 <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
             <div class="toast-body">
-                Follow me on <a href="https://twitter.com/AdityaS3n">Twitter</a>, to get the tweets from my bot!
+                Diwali Special 🪔, checkout out the Ramayan <a href="/threads/ramayana-bala-kanda">here</a>
             </div>
         </div>
 
