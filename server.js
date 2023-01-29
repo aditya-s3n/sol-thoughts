@@ -23,7 +23,8 @@ const threadSchema = new mongoose.Schema({ //thread schema
     postNum: Number,
     complete: Boolean,
     views: Number,
-    posts: Array
+    posts: Array,
+    viewability: Boolean
 });
 
 //create model + collection
@@ -33,8 +34,12 @@ const Thread = mongoose.model("Thread", threadSchema);
 async function findAllThreads() {
     //find all the documents
     const threadDocuments = await Thread.find({}).exec();
+
+    //get all the viewable threads
+    const viewableThreads = threadDocuments.filter((thread) => thread.viewability === true);
+
     //return in array from
-    return threadDocuments;
+    return viewableThreads;
 }
 //find certain thread with posts
 async function findThread(route) {
@@ -48,15 +53,18 @@ async function findTopThreads() {
     //find all the documents
     const threads = await Thread.find({}).exec();
     
+    //get all the viewable threads
+    const viewableThreads = threads.filter((thread) => thread.viewability === true);
+    
     //array to get top 3 thread
-    threads.sort((index1, index2) => {
+    viewableThreads.sort((index1, index2) => {
         return index1.views - index2.views //sort by the views
     });
     //reverse the array
-    threads.reverse();
+    viewableThreads.reverse();
 
     //return the top 3 threads in array
-    return [threads[0], threads[1], threads[2]];
+    return [viewableThreads[0], viewableThreads[1], viewableThreads[2]];
 }
 //add 1 to views of a specific thread
 async function addViewToThread(route) {
